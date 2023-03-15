@@ -40,7 +40,6 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
 RUN apt-get update -y
 RUN  apt-get install -y --no-install-recommends \
       ros-${ROS_DISTRO}-ros-base \
-      ros-${ROS_DISTRO}-ros-base \
       ros-${ROS_DISTRO}-navigation2 \
       ros-${ROS_DISTRO}-nav2-bringup \
       '~ros-${ROS_DISTRO}-turtlebot3-.*' \
