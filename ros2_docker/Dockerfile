@@ -11,9 +11,9 @@ ENV WS_NAME=colcon_ws
 RUN apt-get install -y apt-transport-https
 RUN echo "Set disable_coredump false" >> /etc/sudo.conf
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN apt-get update -y
-RUN apt-get upgrade -y
-RUN apt-get install -y \
+RUN apt-get update -y &&\
+    apt-get upgrade -y &&\
+    apt-get install -y \
         wget \
         curl \
         git \
@@ -37,8 +37,8 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
     curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - && \
     echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > \
         /etc/apt/sources.list.d/ros2-latest.list
-RUN apt-get update -y
-RUN  apt-get install -y --no-install-recommends \
+RUN apt-get update -y &&\
+    apt-get install -y --no-install-recommends \
       ros-${ROS_DISTRO}-ros-base \
       ros-${ROS_DISTRO}-navigation2 \
       ros-${ROS_DISTRO}-nav2-bringup \
@@ -61,8 +61,8 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
     curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - && \
     echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > \
         /etc/apt/sources.list.d/ros2-latest.list
-RUN apt-get update -y
-RUN rosdep init && \
+RUN apt-get update -y && \
+    rosdep init && \
     chmod +x /bin/ros2-setup.bash && \
     gosu ${DEV_NAME} /bin/ros2-setup.bash && \
     runuser -u ${DEV_NAME} ros2-setup.bash && \
